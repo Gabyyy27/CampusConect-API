@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   
   // Un Comentario pertenece a un Usuario
-  this.belongsTo(models.Usuario, {
+  this.belongsTo(models.Usuarios, {
     foreignKey: 'usuarioId',
     as: 'usuario'
   });
