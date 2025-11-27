@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var usuariosRouter = require('./routes/users');
+var publicationsRouter = require('./routes/publications');
+
 var app = express();
 
 // view engine setup
@@ -22,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);        
 app.use('/api/users', usuariosRouter);
+app.use('/api/publications', publicationsRouter);
+
 
 var swaggerJsDoc = require('swagger-jsdoc');
 var swaggerUI = require('swagger-ui-express');
