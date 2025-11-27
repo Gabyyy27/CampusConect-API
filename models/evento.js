@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
    static associate(models) {
   // Un Evento pertenece a un Usuario (creador)
-  this.belongsTo(models.Usuario, {
+  this.belongsTo(models.Usuarios, {
     foreignKey: 'usuarioId',
     as: 'creador'
   });
   
   // Un Evento tiene muchos Asistentes (a través de Asistencia)
-  this.belongsToMany(models.Usuario, {
+  this.belongsToMany(models.Usuarios, {
     through: models.Asistencia,
     foreignKey: 'eventoId',
     otherKey: 'usuarioId',

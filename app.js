@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var usuariosRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
@@ -19,8 +20,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', indexRouter);        
+app.use('/api/users', usuariosRouter);
+
+var swaggerJsDoc = require('swagger-jsdoc');
+var swaggerUI = require('swagger-ui-express');
+
+const options = {
+  definition: {
+    openapi: "3.0.3",
+    info: {
+      title: "Campus Connect Api Documentation",
+      version: "0.1"
+    },
+    servers: [
+      {
+        url: "http://localhost:3000/api"
+      }
+    ]
+
+  },
+  apis: ["./routes/*.js"]
+}
+
+const specs = swaggerJsDoc(options) 
+app.use("/api-docs",swaggerUI.serve, swaggerUI.setup(specs))
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
